@@ -1780,3 +1780,25 @@ C<EXE_FILES: >
 
 =back
 
+=head2 Fri Oct  4 15:00:44 2013: C<Module> L<Devel::hdb|Devel::hdb>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.09>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
