@@ -1780,3 +1780,47 @@ C<EXE_FILES: >
 
 =back
 
+=head2 Wed Oct 23 15:28:36 2013: C<Module> L<FCGI::ProcManager|FCGI::ProcManager>
+
+=over 4
+
+=item *
+
+C<installed into: /htgt/live/current/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.24>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Oct 23 15:28:38 2013: C<Module> L<FCGI::ProcManager::MaxRequests|FCGI::ProcManager::MaxRequests>
+
+=over 4
+
+=item *
+
+C<installed into: /htgt/live/current/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
