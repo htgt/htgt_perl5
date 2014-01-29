@@ -1,0 +1,61 @@
+{
+   "abstract" : "A set of classes for viewing Tree::Simple hierarchies",
+   "author" : [
+      "stevan little, E<lt>stevan@iinteractive.comE<gt>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.131560",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Tree-Simple-View",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::Exception" : "0.15",
+            "Test::LongString" : "0",
+            "Test::More" : "0.47"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Class::Throwable" : "0.1",
+            "Scalar::Util" : "1.18",
+            "Tree::Simple" : "1.07"
+         }
+      }
+   },
+   "provides" : {
+      "Tree::Simple::View" : {
+         "file" : "lib/Tree/Simple/View.pm",
+         "version" : "0.17"
+      },
+      "Tree::Simple::View::ASCII" : {
+         "file" : "lib/Tree/Simple/View/ASCII.pm",
+         "version" : "0.02"
+      },
+      "Tree::Simple::View::DHTML" : {
+         "file" : "lib/Tree/Simple/View/DHTML.pm",
+         "version" : "0.13"
+      },
+      "Tree::Simple::View::Exceptions" : {
+         "file" : "lib/Tree/Simple/View/Exceptions.pm",
+         "version" : "0.01"
+      },
+      "Tree::Simple::View::HTML" : {
+         "file" : "lib/Tree/Simple/View/HTML.pm",
+         "version" : "0.12"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.17"
+}
