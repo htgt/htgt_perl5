@@ -1,7 +1,7 @@
 #
 # BioPerl module for Bio::SeqIO::Handler::GenericRichSeqHandler
 #
-# Please direct questions and support issues to <bioperl-l@bioperl.org> 
+# Please direct questions and support issues to <bioperl-l@bioperl.org>
 #
 # Cared for by Chris Fields
 #
@@ -106,15 +106,15 @@ of the Bioperl mailing lists.  Your participation is much appreciated.
   bioperl-l@bioperl.org                  - General discussion
   http://bioperl.org/wiki/Mailing_lists  - About the mailing lists
 
-=head2 Support 
+=head2 Support
 
 Please direct usage questions or support issues to the mailing list:
 
 I<bioperl-l@bioperl.org>
 
-rather than to the module maintainer directly. Many experienced and 
-reponsive experts will be able look at the problem and quickly 
-address it. Please include a thorough description of the problem 
+rather than to the module maintainer directly. Many experienced and
+reponsive experts will be able look at the problem and quickly
+address it. Please include a thorough description of the problem
 with code and data examples if at all possible.
 
 =head2 Reporting Bugs
@@ -175,7 +175,7 @@ my %HANDLERS = (
         'BASE'          => \&noop,    # this is generated from scratch
         'ORIGIN'        => \&_generic_seq,
         # handles anything else (WGS, WGS_SCAFLD, CONTIG, PROJECT)
-        '_DEFAULT_'     => \&_generic_simplevalue, 
+        '_DEFAULT_'     => \&_generic_simplevalue,
         },
     'embl'      => {
         'ID'            => \&_embl_id,
@@ -193,7 +193,7 @@ my %HANDLERS = (
         'CC'            => \&_generic_comment,
         'FT'            => \&_generic_seqfeatures,
         # handles anything else (WGS, TPA, ANN...)
-        '_DEFAULT_'     => \&_generic_simplevalue, 
+        '_DEFAULT_'     => \&_generic_simplevalue,
         },
     'swiss'     => {
         'ID'            => \&_swiss_id,
@@ -209,7 +209,7 @@ my %HANDLERS = (
         'CC'            => \&_generic_comment,
         'FT'            => \&_generic_seqfeatures,
         # handles anything else, though I don't know what...
-        '_DEFAULT_'     => \&_generic_simplevalue,  
+        '_DEFAULT_'     => \&_generic_simplevalue,
         },
     );
 
@@ -239,9 +239,9 @@ our %VALID_ALPHABET = (
 =head2 new
 
  Title   :  new
- Usage   :  
- Function:  
- Returns :  
+ Usage   :
+ Function:
+ Returns :
  Args    :  -format    Sequence format to be mapped for handler methods
             -builder   Bio::Seq::SeqBuilder object (normally defined in
                        SequenceStreamI object implementation constructor)
@@ -300,17 +300,17 @@ sub handler_methods {
             to the appropriate methods for processing based on the chunk name
             from within the HandlerBaseI object.
 
-            One can also use 
+            One can also use
  Returns :  None
- Args    :  an hash ref containing a data chunk.  
+ Args    :  an hash ref containing a data chunk.
 
 =cut
 
 sub data_handler {
     my ($self, $data) = @_;
     my $nm = $data->{NAME} || $self->throw("No name tag defined!");
-    
-    # this should handle data on the fly w/o caching; any caching should be 
+
+    # this should handle data on the fly w/o caching; any caching should be
     # done in the driver!
     my $method = (exists $self->{'handlers'}->{$nm}) ? ($self->{'handlers'}->{$nm}) :
                 (exists $self->{'handlers'}->{'_DEFAULT_'}) ? ($self->{'handlers'}->{'_DEFAULT_'}) :
@@ -365,7 +365,7 @@ sub format {
  Function:  Convenience method used to retrieve the specified
             parameters from the internal parameter cache
  Returns :  Hash ref containing parameters requested and data as
-            key-value pairs.  Note that some parameter values may be 
+            key-value pairs.  Note that some parameter values may be
             objects, arrays, etc.
  Args    :  List (array) representing the parameters requested
 
@@ -402,12 +402,12 @@ sub set_params {
 =head2 seqbuilder
 
  Title   :  seqbuilder
- Usage   :  
- Function:  
- Returns :  
+ Usage   :
+ Function:
+ Returns :
  Args    :
  Throws  :
- Note    :  
+ Note    :
 
 =cut
 
@@ -420,12 +420,12 @@ sub seqbuilder {
 =head2 build_sequence
 
  Title   :  build_sequence
- Usage   :  
- Function:  
- Returns :  
+ Usage   :
+ Function:
+ Returns :
  Args    :
  Throws  :
- Note    :  
+ Note    :
 
 =cut
 
@@ -445,12 +445,12 @@ sub build_sequence {
 =head2 location_factory
 
  Title   :  location_factory
- Usage   :  
- Function:  
- Returns :  
+ Usage   :
+ Function:
+ Returns :
  Args    :
  Throws  :
- Note    :  
+ Note    :
 
 =cut
 
@@ -470,12 +470,12 @@ sub location_factory {
 =head2 annotation_collection
 
  Title   :  annotation_collection
- Usage   :  
- Function:  
- Returns :  
+ Usage   :
+ Function:
+ Returns :
  Args    :
  Throws  :
- Note    :  
+ Note    :
 
 =cut
 
@@ -520,10 +520,16 @@ sub _genbank_locus {
     } else {
     	$self->{'_params'}->{'-length'} = $seqlength;
     }
-    my $alphabet = lc(shift @tokens);        
-    $self->{'_params'}->{'-alphabet'} =
-        (exists $VALID_ALPHABET{$alphabet}) ? $VALID_ALPHABET{$alphabet} :
-                           $self->warn("Unknown alphabet: $alphabet");
+
+    while ( my $alphabet = shift(@tokens) ) {
+        if ( exists $VALID_ALPHABET{$alphabet} ) {
+            $self->{'_params'}->{'-alphabet'} = $VALID_ALPHABET{$alphabet};
+            last;
+        } else {
+            $self->warn("Unknown alphabet: $alphabet");
+        }
+    }
+
     if (($self->{'_params'}->{'-alphabet'} eq 'dna') || (@tokens > 2)) {
 	    $self->{'_params'}->{'-molecule'} = shift(@tokens);
 	    my $circ = shift(@tokens);
@@ -542,7 +548,7 @@ sub _genbank_locus {
     my $date = join(' ', @tokens);
     # maybe use Date::Time for dates?
     if($date && $date =~ s{\s*((\d{1,2})-(\w{3})-(\d{2,4})).*}{$1}) {
-        
+
 	    if( length($date) < 11 ) {
             # improperly formatted date
             # But we'll be nice and fix it for them
@@ -573,15 +579,15 @@ sub _embl_id {
     my ($name, $sv, $topology, $mol, $div);
     my $line = $data->{DATA};
     #$self->debug("$line\n");
-    my ($idtype) = $line =~ tr/;/;/;    
+    my ($idtype) = $line =~ tr/;/;/;
     if ( $idtype == 6) {   # New style headers contain exactly six semicolons.
     	# New style header (EMBL Release >= 87, after June 2006)
     	my $topology;
     	my $sv;
-        
+
     	# ID   DQ299383; SV 1; linear; mRNA; STD; MAM; 431 BP.
 		# This regexp comes from the new2old.pl conversion script, from EBI
-    	if ($line =~ m/^(\w+);\s+SV (\d+); (\w+); ([^;]+); (\w{3}); (\w{3}); (\d+) \w{2}\./) {    
+    	if ($line =~ m/^(\w+);\s+SV (\d+); (\w+); ([^;]+); (\w{3}); (\w{3}); (\d+) \w{2}\./) {
             ($name, $sv, $topology, $mol, $div) = ($1, $2, $3, $4, $6);
         } else {
             $self->throw("Unrecognized EMBL ID line:[$line]");
@@ -594,7 +600,7 @@ sub _embl_id {
     	if ($topology eq "circular") {
             $self->{'_params'}->{'-is_circular'} = 1;
     	}
-	
+
         if (defined $mol ) {
             if ($mol =~ /DNA/) {
                 $alphabet='dna';
@@ -611,7 +617,7 @@ sub _embl_id {
         if ($line =~ m{^(\S+)[^;]*;\s+(\S+)[^;]*;\s+(\S+)[^;]*;}) {
             ($name, $mol, $div) = ($1, $2, $3);
             #$self->debug("[$name][$mol][$div]");
-        } 
+        }
 
         if($mol) {
             if ( $mol =~ m{circular} ) {
@@ -699,7 +705,7 @@ sub _swiss_genename {
                 my @names = split(m{\s+OR\s+}, $section);
                 push @genenames, ['Name' => shift @names];
                 push @genenames, map {['Synonyms' => $_]} @names;
-                push @stags, ['gene_name' => \@genenames]            
+                push @stags, ['gene_name' => \@genenames]
             }
         } #use Data::Dumper; print Dumper $gn, $genename;# exit;
         my $gn = Bio::Annotation::TagTree->new(-tagname => 'gene_name',
@@ -758,7 +764,7 @@ sub _swiss_date {
     my @dls = split m{\n}, $data->{DATA};
     for my $dl (@dls) {
         my ($date, $version) = split(' ', $dl, 2);
-        $date =~ tr{,}{}d; # remove comma if new version    
+        $date =~ tr{,}{}d; # remove comma if new version
         if ($version =~ m{\(Rel\. (\d+), Last sequence update\)} || # old
             $version =~ m{sequence version (\d+)\.}) { #new
         my $update = Bio::Annotation::SimpleValue->new(
@@ -811,14 +817,14 @@ sub _generic_accession {
 # UniProt/SwissProt O* lines
 sub _generic_species {
     my ($self, $data) = @_;
-    
+
     my $seqformat = $self->format;
     # if data is coming in from GenBank parser...
     if ($seqformat eq 'genbank' &&
         $data->{ORGANISM} =~ m{(.+?)\s(\S+;[^\n\.]+)}ox) {
         ($data->{ORGANISM}, $data->{CLASSIFICATION}) = ($1, $2);
     }
-    
+
     # SwissProt stuff...
     # hybrid names in swissprot files are no longer valid per intergration into
     # UniProt. Files containing these have been split into separate entries, so
@@ -833,17 +839,17 @@ sub _generic_species {
             $taxid = $1;
         }
     }
-    
+
     my ($sl, $class, $sci_name) = ($data->{DATA},
                                    $data->{CLASSIFICATION},
                                    $data->{ORGANISM} || '');
-    my ($organelle,$abbr_name, $common);    
+    my ($organelle,$abbr_name, $common);
     my @class = reverse split m{\s*;\s*}, $class;
     # have to treat swiss different from everything else...
     if ($sl =~ m{^(mitochondrion|chloroplast|plastid)?   # GenBank format
                 \s*(.*?)
-                \s*(?: \( (.*?) \) )?\.?$ 
-         }xmso ){ 
+                \s*(?: \( (.*?) \) )?\.?$
+         }xmso ){
         ($organelle, $abbr_name, $common) = ($1, $2, $3); # optional
     } else {
         $abbr_name = $sl;	# nothing caught; this is a backup!
@@ -1000,7 +1006,7 @@ sub _genbank_dbsource {
 sub _generic_dbsource {
     my ($self, $data) = @_;
     #$self->debug(Dumper($data));
-    while ($data->{DATA} =~ m{([^\n]+)}og) { 
+    while ($data->{DATA} =~ m{([^\n]+)}og) {
         my $dblink = $1;
         $dblink =~ s{\.$}{};
         my $link;
@@ -1014,7 +1020,7 @@ sub _generic_dbsource {
         } else {
             $self->warn("No match for $dblink");
         }
-        $self->annotation_collection->add_Annotation('dblink', $link);        
+        $self->annotation_collection->add_Annotation('dblink', $link);
     }
 }
 
@@ -1050,7 +1056,7 @@ sub _generic_reference {
     }
     if ($data->{DATA} =~ m{^\d+\s+\([a-z]+\s+(\d+)\s+to\s+(\d+)\)}xmso) {
         ($start, $end) = ($1, $2);
-    } 
+    }
     my $ref = Bio::Annotation::Reference->new(
                     -comment    => $data->{REMARK},
                     -location   => $data->{JOURNAL},
@@ -1086,7 +1092,7 @@ sub _generic_seqfeatures {
     my ($self, $data) = @_;
     return if $data->{FEATURE_KEY} eq 'FEATURES';
     my $primary_tag = $data->{FEATURE_KEY};
-    
+
     # grab the NCBI taxon ID from the source SF
     if ($primary_tag eq 'source' && exists $data->{'db_xref'}) {
         if ( $self->{'_params'}->{'-species'} &&
@@ -1095,9 +1101,9 @@ sub _generic_seqfeatures {
         }
     }
     my $source = $self->format;
-    
+
     my $seqid = ${ $self->get_params('accession_number')  }{'accession_number'};
-    
+
     my $loc;
     eval {
         $loc = $self->{'_locfactory'}->from_string($data->{'LOCATION'});
@@ -1128,7 +1134,7 @@ sub _generic_seqfeatures {
 
 ####################### ODDS AND ENDS #######################
 
-# Those things that don't fit anywhere else.  If a specific name 
+# Those things that don't fit anywhere else.  If a specific name
 # maps to the below table, that class and method are used, otherwise
 # it goes into a SimpleValue (I think this is a good argument for why
 # we need a generic mechanism for storing annotation)
