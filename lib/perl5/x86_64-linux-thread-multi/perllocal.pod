@@ -1824,13 +1824,44 @@ C<EXE_FILES: >
 
 =back
 
+<<<<<<< HEAD
+=head2 Mon Jan 27 10:35:14 2014: C<Module> L<Catalyst::View::CSV|Catalyst::View::CSV>
+=======
 =head2 Tue Jan  7 12:51:57 2014: C<Module> L<Class::Throwable|Class::Throwable>
+>>>>>>> 1be415392eea53b0659be42ce5dfb931fd861f05
 
 =over 4
 
 =item *
 
+<<<<<<< HEAD
+C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
+=======
 C<installed into: /nfs/users/nfs_a/af11/git/htgt_root/perl5/lib/perl5>
+>>>>>>> 1be415392eea53b0659be42ce5dfb931fd861f05
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+<<<<<<< HEAD
+C<VERSION: 1.4>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Jan 27 11:32:30 2014: C<Module> L<Template::Plugin::CSV|Template::Plugin::CSV>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
 
 =item *
 

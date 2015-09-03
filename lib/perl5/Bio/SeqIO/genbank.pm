@@ -1,7 +1,7 @@
 #
 # BioPerl module for Bio::SeqIO::genbank
 #
-# Please direct questions and support issues to <bioperl-l@bioperl.org> 
+# Please direct questions and support issues to <bioperl-l@bioperl.org>
 #
 # Cared for by Bioperl project bioperl-l(at)bioperl.org
 #
@@ -130,15 +130,15 @@ of the Bioperl mailing lists.  Your participation is much appreciated.
   bioperl-l@bioperl.org                  - General discussion
   http://bioperl.org/wiki/Mailing_lists  - About the mailing lists
 
-=head2 Support 
+=head2 Support
 
 Please direct usage questions or support issues to the mailing list:
 
 I<bioperl-l@bioperl.org>
 
-rather than to the module maintainer directly. Many experienced and 
-reponsive experts will be able look at the problem and quickly 
-address it. Please include a thorough description of the problem 
+rather than to the module maintainer directly. Many experienced and
+reponsive experts will be able look at the problem and quickly
+address it. Please include a thorough description of the problem
 with code and data examples if at all possible.
 
 =head2 Reporting Bugs
@@ -279,7 +279,7 @@ sub next_seq {
 	    $self->throw("GenBank stream with bad LOCUS line. Not GenBank in my book. Got '$buffer'");
 
 	my @tokens = split(' ', $1);
-    
+
 	# this is important to have the id for display in e.g. FTHelper,
 	# otherwise you won't know which entry caused an error
 	$display_id = shift(@tokens);
@@ -298,9 +298,15 @@ sub next_seq {
     }
 	# the alphabet of the entry
     # shouldn't assign alphabet unless one is specifically designated (such as for rc files)
-    my $alphabet = lc(shift @tokens);
-	$params{'-alphabet'} = (exists $VALID_ALPHABET{$alphabet}) ? $VALID_ALPHABET{$alphabet} :
-                           $self->warn("Unknown alphabet: $alphabet");
+    while ( my $alphabet = shift(@tokens) ) {
+        if ( exists $VALID_ALPHABET{$alphabet} ) {
+            $params{'-alphabet'} = $VALID_ALPHABET{$alphabet};
+            last;
+        } else {
+            $self->warn("Unknown alphabet: $alphabet");
+        }
+    }
+
 	# for aa there is usually no 'molecule' (mRNA etc)
     if ($params{'-alphabet'} eq 'protein') {
 	    $params{'-molecule'} = 'PRT'
@@ -640,7 +646,7 @@ sub next_seq {
 	    # DO NOT read lines in the while condition -- this is done as a side
 	    # effect in _read_FTHelper_GenBank!
 
-#	    part of new circular spec: 
+#	    part of new circular spec:
 #	    commented out for now until kinks worked out
 	    #my $sourceEnd = 0;
 	    #$sourceEnd = $2 if ($buffer =~ /(\d+?)\.\.(\d+?)$/);
@@ -660,7 +666,7 @@ sub next_seq {
 #		implement new circular spec: features that cross the origin are now
 #		seamless instead of being 2 separate joined features
 #		commented out until kinks get worked out
-		#if ((! $args{'-nojoin'}) && $ftunit->{'loc'} =~ /^join\((\d+?)\.\.(\d+?),(\d+?)..(\d+?)\)$/ 
+		#if ((! $args{'-nojoin'}) && $ftunit->{'loc'} =~ /^join\((\d+?)\.\.(\d+?),(\d+?)..(\d+?)\)$/
 		#&& $sourceEnd == $2 && $3 == 1) {
 			#my $start = $1;
 			#my $end = $2 + $4;
@@ -710,7 +716,7 @@ sub next_seq {
 		    $_ = $self->_readline;
 		}
 		if ($ctg) {
-		    $annotation->add_Annotation( 
+		    $annotation->add_Annotation(
 			Bio::Annotation::SimpleValue->new(-tagname => 'contig',
 							  -value => $ctg )
 			);
@@ -822,7 +828,7 @@ sub write_seq {
 
 	    $self->warn("No whitespace allowed in GenBank display id [". $seq->display_id. "]")
 		if $seq->display_id =~ /\s/;
-        
+
 	    $temp_line = sprintf ("%-12s%-15s%13s %s%4s%-8s%-8s %3s %-s\n",
 				  'LOCUS', $seq->id(),$len,
 				  (lc($alpha) eq 'protein') ? ('aa','', '') :
@@ -869,8 +875,8 @@ sub write_seq {
 			      "\n");
 	    }
 	}
-    
-    # if there, write the PROJECT line    
+
+    # if there, write the PROJECT line
 	for my $proj ( $seq->annotation->get_Annotations('project') ) {
 		$self->_print("PROJECT     ".$proj->value."\n");
     }
@@ -1352,7 +1358,7 @@ sub _read_GenBank_Species {
         $line =~ s{<[^>]+>}{}g;
         if ($line =~ m{^(?:\s{0,2})(\w+)\s+(.+)?$}ox) {
             ($tag, $data) = ($1, $2 || '');
-            last if ($tag && !exists $source{$tag});            
+            last if ($tag && !exists $source{$tag});
         } else {
             return unless $tag;
             ($data = $line) =~ s{^\s+}{};
@@ -1360,11 +1366,11 @@ sub _read_GenBank_Species {
             $tag = 'CLASSIFICATION' if ($tag ne 'CLASSIFICATION' && $tag eq 'ORGANISM' &&  $line =~ m{[;\.]+});
         }
         (exists $ann->{$tag}) ? ($ann->{$tag} .= ' '.$data) : ($ann->{$tag} .= $data);
-        $line = undef;        
+        $line = undef;
     }
-    
+
     ($sl, $class_lines, $sci_name) = ($ann->{SOURCE}, $ann->{CLASSIFICATION}, $ann->{ORGANISM});
-    
+
     $$buffer = $line;
 
     $sci_name || return;
@@ -1376,8 +1382,8 @@ sub _read_GenBank_Species {
 		     (mitochondrion|chloroplast|plastid)?
 		     \s*(.*?)
 		     \s*(?: \( (.*?) \) )?\.?
-		     $ 
-		 }xms ){ 
+		     $
+		 }xms ){
         ($organelle, $abbr_name, $common) = ($1, $2, $3); # optional
     } else {
         $abbr_name = $sl;	# nothing caught; this is a backup!
@@ -1602,11 +1608,11 @@ sub _write_line_GenBank {
            text
  Example :
  Returns : nothing
- Args    : file handle, 
-           first header,  
-           second header, 
-           text-line, 
-           regex for line breaks, 
+ Args    : file handle,
+           first header,
+           second header,
+           text-line,
+           regex for line breaks,
            total line length
 
 
@@ -1757,7 +1763,7 @@ sub _sv_generation_func {
 
 =cut
 
-	
+
 sub _kw_generation_func {
     my ($obj,$value) = @_;
     if( defined $value ) {
