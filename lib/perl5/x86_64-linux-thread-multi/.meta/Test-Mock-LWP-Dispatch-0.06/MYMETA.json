@@ -1,0 +1,55 @@
+{
+   "abstract" : "mocks LWP::UserAgent and dispatches your requests/responses",
+   "author" : [
+      "Yury Zavarin <yury.zavarin@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300032, CPAN::Meta::Converter version 2.130870, CPAN::Meta::Converter version 2.131560",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-Mock-LWP-Dispatch",
+   "prereqs" : {
+      "build" : {
+         "requires" : {}
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Data::Dumper" : "0",
+            "Exporter" : "0",
+            "HTTP::Request" : "0",
+            "HTTP::Response" : "0",
+            "LWP::UserAgent" : "0",
+            "Test::MockObject" : "0",
+            "base" : "0",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::Exception" : "0",
+            "Test::More" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "homepage" : "http://github.com/tadam/Test-Mock-LWP-Dispatch",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tadam/Test-Mock-LWP-Dispatch.git"
+      }
+   },
+   "version" : "0.06"
+}
