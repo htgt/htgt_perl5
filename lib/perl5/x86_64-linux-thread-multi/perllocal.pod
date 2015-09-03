@@ -1868,3 +1868,47 @@ C<EXE_FILES: >
 
 =back
 
+=head2 Thu Sep  3 10:15:42 2015: C<Module> L<Test::Mock::LWP::Dispatch|Test::Mock::LWP::Dispatch>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_a/af11/git/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.06>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Sep  3 10:16:02 2015: C<Module> L<JSON|JSON>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_a/af11/git/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.90>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
