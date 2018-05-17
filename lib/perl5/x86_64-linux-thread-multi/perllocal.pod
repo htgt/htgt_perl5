@@ -1912,3 +1912,69 @@ C<EXE_FILES: >
 
 =back
 
+=head2 Wed Feb 22 11:29:51 2017: C<Module> L<MooseX::Types::Path::Class::MoreCoercions|MooseX::Types::Path::Class::MoreCoercions>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.003>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Feb 22 11:29:58 2017: C<Module> L<HTGT::QC::Common|HTGT::QC::Common>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.050>
+
+=item *
+
+C<EXE_FILES: bin/crispr_damage_analysis.pl bin/exonerate bin/fetch-seq-projects.sh bin/fetch-seq-reads.sh bin/fetch_lims2_seq_projects.pl bin/fetch_lims2_seq_reads.pl bin/generate_primers_attempts.pl bin/merge_vcf_variants.pl bin/qc bin/run-exonerate-jobarray.pl>
+
+=back
+
+=head2 Wed May 16 14:47:28 2018: C<Module> L<Catalyst::Plugin::RequireSSL|Catalyst::Plugin::RequireSSL>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.07>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
