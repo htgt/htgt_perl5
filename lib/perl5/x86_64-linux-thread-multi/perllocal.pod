@@ -1780,13 +1780,13 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Wed Oct 23 15:28:36 2013: C<Module> L<FCGI::ProcManager|FCGI::ProcManager>
+=head2 Tue Oct 22 12:12:22 2013: C<Module> L<FCGI::ProcManager|FCGI::ProcManager>
 
 =over 4
 
 =item *
 
-C<installed into: /htgt/live/current/perl5/lib/perl5>
+C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
 
 =item *
 
@@ -1802,13 +1802,13 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Wed Oct 23 15:28:38 2013: C<Module> L<FCGI::ProcManager::MaxRequests|FCGI::ProcManager::MaxRequests>
+=head2 Tue Oct 22 12:15:13 2013: C<Module> L<FCGI::ProcManager::MaxRequests|FCGI::ProcManager::MaxRequests>
 
 =over 4
 
 =item *
 
-C<installed into: /htgt/live/current/perl5/lib/perl5>
+C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
 
 =item *
 
@@ -1824,21 +1824,13 @@ C<EXE_FILES: >
 
 =back
 
-<<<<<<< HEAD
 =head2 Mon Jan 27 10:35:14 2014: C<Module> L<Catalyst::View::CSV|Catalyst::View::CSV>
-=======
-=head2 Tue Jan  7 12:51:57 2014: C<Module> L<Class::Throwable|Class::Throwable>
->>>>>>> 1be415392eea53b0659be42ce5dfb931fd861f05
 
 =over 4
 
 =item *
 
-<<<<<<< HEAD
 C<installed into: /nfs/users/nfs_d/dp10/git-checkout/htgt_root/perl5/lib/perl5>
-=======
-C<installed into: /nfs/users/nfs_a/af11/git/htgt_root/perl5/lib/perl5>
->>>>>>> 1be415392eea53b0659be42ce5dfb931fd861f05
 
 =item *
 
@@ -1846,7 +1838,6 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-<<<<<<< HEAD
 C<VERSION: 1.4>
 
 =item *
@@ -1914,6 +1905,72 @@ C<LINKTYPE: dynamic>
 =item *
 
 C<VERSION: 2.90>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Feb 22 11:29:51 2017: C<Module> L<MooseX::Types::Path::Class::MoreCoercions|MooseX::Types::Path::Class::MoreCoercions>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.003>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Feb 22 11:29:58 2017: C<Module> L<HTGT::QC::Common|HTGT::QC::Common>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.050>
+
+=item *
+
+C<EXE_FILES: bin/crispr_damage_analysis.pl bin/exonerate bin/fetch-seq-projects.sh bin/fetch-seq-reads.sh bin/fetch_lims2_seq_projects.pl bin/fetch_lims2_seq_reads.pl bin/generate_primers_attempts.pl bin/merge_vcf_variants.pl bin/qc bin/run-exonerate-jobarray.pl>
+
+=back
+
+=head2 Wed May 16 14:47:28 2018: C<Module> L<Catalyst::Plugin::RequireSSL|Catalyst::Plugin::RequireSSL>
+
+=over 4
+
+=item *
+
+C<installed into: /nfs/users/nfs_p/pk8/dev/htgt_root/perl5/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.07>
 
 =item *
 
